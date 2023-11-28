@@ -1,7 +1,7 @@
 package com.example.composeapplication.banya.http
 
+import com.example.composeapplication.banya.data.DoubanTopItem
 import okhttp3.OkHttpClient
-import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
@@ -29,8 +29,12 @@ object RetrofitData {
 
 interface ApiServer {
     @GET(value = "api/v1/top")
-    fun queryUser(@Query(value = "type", encoded = true) type: String): Call<DoubanTop>
+    suspend fun queryUser(
+        @Query("skip") skip: Int,
+        @Query("limit") limit: Int,
+        @Query(value = "type", encoded = true) type: String
+    ): List<DoubanTopItem>
 
-    @GET(value = "api/v1/top")
-    fun getFilm(): Call<List<Films>>
+//    @GET(value = "api/v1/top")
+//    fun getFilm(): Call<List<Movie>>
 }

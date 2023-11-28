@@ -1,4 +1,4 @@
-package com.example.composeapplication.banya.http
+package com.example.composeapplication.banya.data
 
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -12,26 +12,19 @@ fun filmList(jsonList: String): List<Movie> {
     // json转换成集合
     //val jsonList =
     val accountList: DoubanTop =gson.fromJson(jsonList, object : TypeToken<DoubanTop>(){}.type)
-    val movies: MutableList<Movie>
+    val movies: MutableList<Movie> = mutableListOf()
 
-    accountList.forEachIndexed { i, item ->
-        var movie = Movie(accountList[i].doubanId, accountList[i].doubanId)
-        movie.doubanId = accountList[i].doubanId,
-        movie.name = accountList[0].filmInfo[0].name,
-        movie.doubanRating = accountList[0].doubanRating,
-        movie.genre = accountList[0].filmInfo[0].genre,
-        movie.poster = accountList[0].filmInfo[0].poster
+    for (i in accountList) {
+        val movie = Movie(
+            "${i.doubanId}",
+            "${i.filmInfo[0].name}",
+            "${i.doubanRating}",
+            "${i.filmInfo[0].genre}",
+            "${i.filmInfo[0].poster}"
+        )
         movies.add(movie)
     }
-
-    return movies
-    Movie(
-        doubanId = accountList[0].doubanId,
-        name = accountList[0].filmInfo[0].name,
-        doubanRating = accountList[0].doubanRating,
-        genre = accountList[0].filmInfo[0].genre,
-        poster = accountList[0].filmInfo[0].poster
-    )
+    return movies.toList()
     println("fromJson to List: ${accountList.size}")
     //println(accountList[0].castRatings)
 }
@@ -99,9 +92,19 @@ data class Film(
 )
 
 data class Movie(
-    val doubanId: String,
-    val name: String,
-    val doubanRating: String,
-    val genre: String,
-    val poster: String
+    val doubanId: String?,
+    val name: String?,
+    val doubanRating: String?,
+    val genre: String?,
+    val poster: String?
 )
+
+fun DoubanTopItem.asEntry():Movie{
+    return Movie(
+        doubanId = this.doubanId,
+        name = this.filmInfo[0].name,
+        doubanRating = this.doubanRating,
+        genre = this.filmInfo[0].genre,
+        poster = this.filmInfo[0].poster
+    )
+}

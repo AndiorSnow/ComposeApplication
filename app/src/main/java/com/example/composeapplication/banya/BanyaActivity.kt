@@ -1,7 +1,6 @@
 package com.example.composeapplication.banya
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.padding
@@ -18,15 +17,8 @@ import androidx.navigation.compose.rememberNavController
 import com.example.composeapplication.banya.BanyaScreen.Book
 import com.example.composeapplication.banya.BanyaScreen.Film
 import com.example.composeapplication.banya.BanyaScreen.Music
-import com.example.composeapplication.banya.http.ApiServer
-import com.example.composeapplication.banya.http.DoubanTop
-import com.example.composeapplication.banya.http.RetrofitData
-import com.example.composeapplication.banya.ui.FilmScreen
 import com.example.composeapplication.banya.ui.components.BanyaTabRow
 import com.example.composeapplication.banya.ui.theme.BanyaTheme
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class BanyaActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,21 +29,21 @@ class BanyaActivity : ComponentActivity() {
             BanyaApp()
         }
 
+//        val apiService = RetrofitData.create(ApiServer::class.java)
+//        apiService.queryUser("Imdb").enqueue(object : Callback<DoubanTop> {
+//            override fun onFailure(call: Call<DoubanTop>, t: Throwable) {
+//                Log.e("Retrofit", t.message?:"unknown reason")
+//            }
+//
+//            override fun onResponse(call: Call<DoubanTop>, response: Response<DoubanTop>) {
+//                Log.e("Retrofit", response.body()?.toString()?:"response is null")
+//            }
+//        })
         //HiOkHttp.get()
         //HiOkHttp.getAsync()
         //HiOkHttp.post()
 
-        //Retrofit的onFailure和onResponse的回调都是在主线程中
-        val apiService = RetrofitData.create(ApiServer::class.java)
-        apiService.queryUser("Imdb").enqueue(object : Callback<DoubanTop> {
-            override fun onFailure(call: Call<DoubanTop>, t: Throwable) {
-                Log.e("Retrofit", t.message?:"unknown reason")
-            }
 
-            override fun onResponse(call: Call<DoubanTop>, response: Response<DoubanTop>) {
-                Log.e("Retrofit", response.body()?.toString()?:"response is null")
-            }
-        })
     }
 }
 
@@ -98,7 +90,7 @@ fun BanyaNavHost(navController: NavHostController, modifier: Modifier) {
         composable(
             route = Film.name
         ) {
-            FilmScreen()
+            FilmScreen(  )
         }
 
         composable(

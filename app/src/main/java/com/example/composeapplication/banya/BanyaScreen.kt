@@ -27,7 +27,7 @@ enum class BanyaScreen(
     Film(
         icon = Icons.Filled.PlayCircleFilled,
         body = {
-            //FilmsBody(UserData.accounts)
+            FilmScreen()
         }
     ),
     Music(
@@ -48,7 +48,7 @@ enum class BanyaScreen(
                 Book.name -> Book
                 Film.name -> Film
                 Music.name -> Music
-                null -> Film
+                null -> Music
                 else -> throw IllegalArgumentException("Route $route is not recognized.")
             }
     }
