@@ -17,10 +17,10 @@ fun filmList(jsonList: String): List<Movie> {
     for (i in accountList) {
         val movie = Movie(
             "${i.doubanId}",
-            "${i.filmInfo[0].name}",
+            "${i.data[0].name}",
             "${i.doubanRating}",
-            "${i.filmInfo[0].genre}",
-            "${i.filmInfo[0].poster}"
+            "${i.data[0].genre}",
+            "${i.data[0].poster}"
         )
         movies.add(movie)
     }
@@ -52,7 +52,7 @@ data class DoubanTopItem(
     val alias: String,
     val castRatings: Int,
     val createdAt: Long,
-    val filmInfo: List<Film>,
+    val data: List<Film>,
     val dateReleased: String,
     val doubanId: String,
     val doubanRating: String,
@@ -102,9 +102,9 @@ data class Movie(
 fun DoubanTopItem.asEntry():Movie{
     return Movie(
         doubanId = this.doubanId,
-        name = this.filmInfo[0].name,
+        name = this.data[0].name,
         doubanRating = this.doubanRating,
-        genre = this.filmInfo[0].genre,
-        poster = this.filmInfo[0].poster
+        genre = this.data[0].genre,
+        poster = this.data[0].poster
     )
 }

@@ -3,7 +3,6 @@ package com.example.composeapplication.banya.data
 import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.example.composeapplication.banya.http.ApiServer
 import com.example.composeapplication.banya.http.RetrofitData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -32,12 +31,13 @@ class FilmDataSource : PagingSource<Int, Movie>() {
 }
 
 class FilmRemoteDataSource {
-    private val apiService = RetrofitData.create(ApiServer::class.java)
+    private val apiService = RetrofitData
     private val ioDispatcher = Dispatchers.IO
 
     suspend fun fetchLatestMovies(skip: Int, limit: Int): List<DoubanTopItem> =
         withContext(ioDispatcher) {
-            apiService.queryUser(skip, limit, type = "Douban")
+            Log.d("MovieDataSource", "${skip}, $limit")
+            apiService.queryUser(skip, limit)
         }
 
 }
