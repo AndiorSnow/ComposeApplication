@@ -1,4 +1,4 @@
-package com.example.composeapplication.banya
+package com.example.composeapplication.banya.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -7,4 +7,6 @@ import com.example.composeapplication.banya.data.FilmRepository
 
 class MovieViewModel : ViewModel() {
     fun fetchLastedMovies() = FilmRepository.getPagingData().cachedIn(viewModelScope)
+
+
 }

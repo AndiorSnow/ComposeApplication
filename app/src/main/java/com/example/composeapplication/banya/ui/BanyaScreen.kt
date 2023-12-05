@@ -1,4 +1,4 @@
-package com.example.composeapplication.banya
+package com.example.composeapplication.banya.ui
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Book
@@ -6,6 +6,8 @@ import androidx.compose.material.icons.filled.MusicNote
 import androidx.compose.material.icons.filled.PlayCircleFilled
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.vector.ImageVector
+import com.example.composeapplication.banya.ui.compose.FilmScreen
+
 //import com.example.composeapplication.banya.data.UserData
 //import com.example.composeapplication.banya.ui.books.BooksBody
 //import com.example.composeapplication.banya.ui.films.FilmsBody
@@ -48,7 +50,7 @@ enum class BanyaScreen(
                 Book.name -> Book
                 Film.name -> Film
                 Music.name -> Music
-                null -> Music
+                null -> Film
                 else -> throw IllegalArgumentException("Route $route is not recognized.")
             }
     }
