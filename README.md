@@ -33,7 +33,7 @@
 * UI modify
 
 
-# Week 3: Code Improvement + review Sunflower demo
+# Week 3: Code improvement + review Sunflower demo
 ## Day 1: 
 * target
 	* read sunflower by myself
@@ -70,12 +70,49 @@
 * accomplishment 
 	* application structure of sunflower app
 
-# Week 4: Code Improvement + third-party libraries
+# Week 4: Code improvement + third-party libraries
 ## Day 1
 * target 
 	* find a third-party library and start to learn
-  * fix the bugs in my demo
+ 	* fix the bugs in my demo
 * accomplishment
-  * choose the retrofit2
-  * fix the bugs in my demo
-  * add glide to my demo
+  	* select Retrofit2 as my target
+  	* fix the bugs in my demo
+  	* add glide to my demo
+
+## Day 2
+* target 
+	* learn th function, structure and process of Retrofit2
+ 	* improve my demo
+* accomplishment
+  	* learn th function, structure and process of Retrofit2
+  	* add GenreTopBar to my demo
+  	* modify the theme of my demo
+
+ ## Day 3
+* target 
+	* learn the dynamic proxy pattern in retrofit2
+ 	* improve my demo
+* accomplishment
+  	* learn the dynamic proxy pattern in retrofit2
+  	* adjust the engineering structure of my demo's code
+  	* update material2 to material3 in my demo
+ 
+## Day 4
+* target 
+	* learn the levels of Retrofit2 and select a specific requirement
+* accomplishment
+  	* draw the architecture diagram of Retrofit2
+  	* find the role of coroutine in the architecture diagram
+
+## Day 5
+* target 
+	* draw the class diagram, architecture diagram , and flow chart of ServiceMethod
+* accomplishment
+  	* draw the class diagram, architecture diagram , and flow chart of ServiceMethod
+
+# Week 5: Code improvement + third-party libraries + demo task
+## Day 1
+* target
+	* continue learning retrofit2
+ 	* improve my demo
