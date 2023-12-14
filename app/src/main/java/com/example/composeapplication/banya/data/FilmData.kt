@@ -1,33 +1,30 @@
 package com.example.composeapplication.banya.data
 
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
-
-fun filmList(jsonList: String): List<Movie> {
-    // json转换成对象
-//    val json = "{\"uid\":\"00001\",\"userName\":\"Freeman\",\"telNumber\":\"13000000000\"}"
-    val gson = Gson()
-//    val account: Account2 = gson.fromJson<Account2>(json, Account2::class.java)
-//    println(account.toString())
-    // json转换成集合
-    //val jsonList =
-    val accountList: DoubanTop =gson.fromJson(jsonList, object : TypeToken<DoubanTop>(){}.type)
-    val movies: MutableList<Movie> = mutableListOf()
-
-    for (i in accountList) {
-        val movie = Movie(
-            "${i.doubanId}",
-            "${i.data[0].name}",
-            "${i.doubanRating}",
-            "${i.data[0].genre}",
-            "${i.data[0].poster}"
-        )
-        movies.add(movie)
-    }
-    return movies.toList()
-    println("fromJson to List: ${accountList.size}")
-    //println(accountList[0].castRatings)
-}
+//fun filmList(jsonList: String): List<Movie> {
+//    // json转换成对象
+////    val json = "{\"uid\":\"00001\",\"userName\":\"Freeman\",\"telNumber\":\"13000000000\"}"
+//    val gson = Gson()
+////    val account: Account2 = gson.fromJson<Account2>(json, Account2::class.java)
+////    println(account.toString())
+//    // json转换成集合
+//    //val jsonList =
+//    val accountList: DoubanTop =gson.fromJson(jsonList, object : TypeToken<DoubanTop>(){}.type)
+//    val movies: MutableList<Movie> = mutableListOf()
+//
+//    for (i in accountList) {
+//        val movie = Movie(
+//            "${i.doubanId}",
+//            "${i.data[0].name}",
+//            "${i.doubanRating}",
+//            "${i.data[0].genre}",
+//            "${i.data[0].poster}"
+//        )
+//        movies.add(movie)
+//    }
+//    return movies.toList()
+//    println("fromJson to List: ${accountList.size}")
+//    //println(accountList[0].castRatings)
+//}
 
 //data class Account2 (
 //    var uid: String,
@@ -46,7 +43,7 @@ fun filmList(jsonList: String): List<Movie> {
 //    }
 //}
 
-class DoubanTop : ArrayList<DoubanTopItem>()
+//class DoubanTop : ArrayList<DoubanTopItem>()
 
 data class DoubanTopItem(
     val alias: String,
@@ -91,7 +88,7 @@ data class Film(
     val updatedAt: Long
 )
 
-data class Movie(
+data class MovieItem(
     val doubanId: String?,
     val name: String?,
     val doubanRating: String?,
@@ -99,12 +96,12 @@ data class Movie(
     val poster: String?
 )
 
-fun DoubanTopItem.asEntry():Movie{
-    return Movie(
+fun DoubanTopItem.asEntry() : MovieItem {
+    return MovieItem(
         doubanId = this.doubanId,
         name = this.data[0].name,
         doubanRating = this.doubanRating,
         genre = this.data[0].genre,
-        poster = this.data[0].poster
+        poster = this.data[0].poster,
     )
 }

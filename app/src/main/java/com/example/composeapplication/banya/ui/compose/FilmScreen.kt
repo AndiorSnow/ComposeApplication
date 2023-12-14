@@ -24,7 +24,7 @@ import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -32,37 +32,39 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.DefaultAlpha
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.bumptech.glide.integration.compose.placeholder
-import com.example.composeapplication.banya.data.Movie
+import com.example.composeapplication.R
+import com.example.composeapplication.banya.data.MovieItem
 import com.example.composeapplication.banya.ui.Dimens.InactiveTabOpacity
 import com.example.composeapplication.banya.ui.Dimens.TabFadeInAnimationDelay
 import com.example.composeapplication.banya.ui.Dimens.TabFadeInAnimationDuration
 import com.example.composeapplication.banya.ui.Dimens.TabFadeOutAnimationDuration
-import com.example.composeapplication.banya.viewmodel.MovieViewModel
+import com.example.composeapplication.banya.viewmodel.FilmViewModel
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FilmScreen(
-    viewModel: MovieViewModel = viewModel(),
+    viewModel: FilmViewModel = hiltViewModel(),
     backgroundColor: Color = MaterialTheme.colorScheme.background
 ) {
     //实现分页效果
-    val data = viewModel.fetchLastedMovies().collectAsLazyPagingItems()
+    val data = viewModel.postOfData().collectAsLazyPagingItems()
+    //val data = viewModel.fetchLastedMovies().collectAsLazyPagingItems()
+    val titles : Array<String> = stringArrayResource(id = R.array.film_genre)
 
     Scaffold (
         modifier = Modifier,
         topBar = {
             GenreTabBar(
-//                onGeneralClick = { viewModel.updateData() }
-//                onCrimeClick = { viewModel.updateData() }
-//                onComedyClick = { viewModel.updateData() }
-//                onRomanceClick = { viewModel.updateData() }
-//                onScifiClick = { viewModel.updateData() }
+                viewModel = viewModel,
+                titles = titles
             )
         }
     ) { contentPadding ->
@@ -93,6 +95,8 @@ fun FilmScreen(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun GenreTabBar(
+    viewModel: FilmViewModel = hiltViewModel(),
+    titles: Array<String>
 //    onGeneralClick: () -> Unit,
 //    onCrimeClick: () -> Unit,
 //    onComedyClick: () -> Unit,
@@ -100,12 +104,11 @@ private fun GenreTabBar(
 //    onScifiClick: () -> Unit,
 //    modifier: Modifier
 ) {
-    val color = MaterialTheme.colorScheme.secondary
-    var state = remember { mutableStateOf(0) }
-    val titles = listOf("综合", "剧情", "犯罪", "喜剧", "爱情", "科幻", "动画", "战争", "灾难", "动作")
-    Column (
-        //Modifier.background(MaterialTheme.colorScheme.primary),
-    ){
+    val colorSelected = MaterialTheme.colorScheme.surface
+    val colorUnselected = MaterialTheme.colorScheme.secondary
+    var state = remember { mutableIntStateOf(0) }
+    val titles : Array<String> = titles
+    Column {
         ScrollableTabRow(
             selectedTabIndex = state.value,
             modifier = Modifier.wrapContentWidth(),
@@ -132,18 +135,21 @@ private fun GenreTabBar(
                     )
                 }
                 val tabTintColor by animateColorAsState(
-                    targetValue = if (selected) color else color.copy(alpha = InactiveTabOpacity),
+                    targetValue = if (selected) colorSelected else colorUnselected.copy(alpha = InactiveTabOpacity),
                     animationSpec = animSpec,
                     label = "",
                 )
                 Tab(
                     text = { Text(title, color = tabTintColor) },
                     selected = selected,
-                    onClick = { state.value = index },
+
+                    onClick = {
+                        //Log.d("MovieDataSource", title)
+                        state.value = index
+                        //viewModel.updateData(index)
+                        },
                     selectedContentColor = MaterialTheme.colorScheme.surface,
                     unselectedContentColor = MaterialTheme.colorScheme.primary,
-
-//                  onClick = { viewModel.updateData() }
                 )
             }
         }
@@ -153,7 +159,7 @@ private fun GenreTabBar(
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
 fun MovieCard(
-    movie: Movie,
+    movie: MovieItem,
     color: Color
     ) {
     Card (

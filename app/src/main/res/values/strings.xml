@@ -1,4 +1,26 @@
 <resources>
     <string name="app_name">Banya</string>
     <string name="menu_filter_by_grow_zone" translation_description="The label for the menu item to filter the displayed plants by grow zone.">Filter by grow zone</string>
+    <string name="tag0">综合</string>
+    <string name="tag1">爱情</string>
+    <string name="tag2">动画</string>
+    <string name="tag3">动作</string>
+    <string name="tag4">犯罪</string>
+    <string name="tag5">剧情</string>
+    <string name="tag6">科幻</string>
+    <string name="tag7">喜剧</string>
+    <string name="tag8">灾难</string>
+    <string name="tag9">战争</string>
+    <string-array name="film_genre">
+        <item name = "all">综合</item>
+        <item name = "romantic">爱情</item>
+        <item name = "animation">动画</item>
+        <item name = "action">动作</item>
+        <item name = "crime">犯罪</item>
+        <item name = "feature">剧情</item>
+        <item name = "sci-fi">科幻</item>
+        <item name = "comedy">喜剧</item>
+        <item name = "disaster">灾难</item>
+        <item name = "war">战争</item>
+    </string-array>
 </resources>

@@ -1,0 +1,38 @@
+[
+  {
+    "id": "1",
+    "name": "romantic"
+  },
+  {
+    "id": "2",
+    "name": "animation"
+  },
+  {
+    "id": "3",
+    "name": "action"
+  },
+  {
+    "id": "4",
+    "name": "crime"
+  },
+  {
+    "id": "5",
+    "name": "feature"
+  },
+  {
+    "id": "6",
+    "name": "sci-fi"
+  },
+  {
+    "id": "7",
+    "name": "comedy"
+  },
+  {
+    "id": "8",
+    "name": "disaster"
+  },
+  {
+    "id": "9",
+    "name": "war"
+  }
+]

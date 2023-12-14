@@ -2,6 +2,8 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("org.jetbrains.kotlin.kapt")
+    //id("com.google.devtools.ksp")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -38,7 +40,7 @@ android {
         jvmTarget = "17"
     }
     buildFeatures {
-        //viewBinding = true
+        viewBinding = true
         dataBinding = true
         compose = true
     }
@@ -53,7 +55,7 @@ android {
 }
 
 dependencies {
-
+    val room_version = "2.5.0"
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
     implementation("androidx.activity:activity-compose:1.7.0")
@@ -82,6 +84,20 @@ dependencies {
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.33.2-alpha")
     implementation("androidx.paging:paging-runtime-ktx:3.2.1")
     implementation("androidx.paging:paging-compose:1.2.0")
+    implementation("com.google.dagger:hilt-android:2.44")
+    implementation("androidx.work:work-runtime-ktx:2.8.0")
+    kapt("com.google.dagger:hilt-android-compiler:2.44")
+    implementation("androidx.hilt:hilt-work:1.0.0")
+    implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
+    kapt("androidx.hilt:hilt-compiler:1.0.0")
+
+    implementation("androidx.room:room-runtime:$room_version")
+    implementation("androidx.room:room-paging:$room_version")
+    kapt("org.xerial:sqlite-jdbc:3.34.0")
+    kapt("androidx.room:room-compiler:$room_version")
+    implementation("androidx.room:room-ktx:$room_version")
+    testImplementation("androidx.room:room-testing:$room_version")
+
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     //androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
